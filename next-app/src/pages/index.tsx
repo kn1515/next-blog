@@ -2,6 +2,9 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
+import nextConfig from "../../next.config.mjs";
+const BASE_PATH = nextConfig.basePath || "";
+
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -61,7 +64,7 @@ export default function Home() {
         >
           Powered by{" "}
           <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+            <Image src={`${BASE_PATH}/vercel.svg`} alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
