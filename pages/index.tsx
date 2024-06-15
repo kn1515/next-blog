@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
-import nextConfig from "../../next.config.js";
+import nextConfig from "../next.config.js";
 const BASE_PATH = nextConfig.basePath || "";
 
 export default function Home() {
