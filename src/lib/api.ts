@@ -1,28 +1,63 @@
-import { Post } from "@/interfaces/post";
 import fs from "fs";
+import path from "path";
 import matter from "gray-matter";
-import { join } from "path";
 
-const postsDirectory = join(process.cwd(), "_posts");
+type Post = {
+  slug: string;
+  content: string;
+  title: string;
+  date: string;
+};
 
+const postsDirectory = path.join(process.cwd(), "content");
+
+/**
+ * postsDirectory 以下のディレクトリ名を取得する
+ */
 export function getPostSlugs() {
-  return fs.readdirSync(postsDirectory);
+  const allDirents = fs.readdirSync(postsDirectory, { withFileTypes: true });
+  return allDirents
+    .filter((dirent) => dirent.isDirectory())
+    .map(({ name }) => name);
 }
 
-export function getPostBySlug(slug: string) {
-  const realSlug = slug.replace(/\.md$/, "");
-  const fullPath = join(postsDirectory, `${realSlug}.md`);
+/**
+ * 指定したフィールド名から、記事のフィールドの値を取得する
+ */
+export function getPostBySlug(slug: string, fields: string[] = []) {
+  const fullPath = path.join(postsDirectory, slug, "index.md");
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  return { ...data, slug: realSlug, content } as Post;
+  const items: Post = {
+    slug: "",
+    content: "",
+    title: "",
+    date: "",
+  };
+
+  fields.forEach((field) => {
+    if (field === "slug") {
+      items[field] = slug;
+    }
+    if (field === "content") {
+      items[field] = content;
+    }
+    if (field === "title" || field === "date") {
+      items[field] = data[field];
+    }
+  });
+  return items;
 }
 
-export function getAllPosts(): Post[] {
+/**
+ * すべての記事について、指定したフィールドの値を取得して返す
+ * @param fields 取得するフィールド
+ */
+export function getAllPosts(fields: string[] = []) {
   const slugs = getPostSlugs();
   const posts = slugs
-    .map((slug) => getPostBySlug(slug))
-    // sort posts by date in descending order
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
+    .map((slug) => getPostBySlug(slug, fields))
+    .sort((a, b) => (a.date > b.date ? -1 : 1));
   return posts;
 }
