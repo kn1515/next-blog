@@ -20,21 +20,21 @@ export default function About() {
           <section className="body-font">
             <div className="lg:w-4/6 mx-auto">
               <div className="flex flex-col sm:flex-row mt-10">
-                <div className="sm:w-1/3 text-center sm:pr-8 sm:py-8">
+                <div className="sm:w-1/3 text-start sm:pr-8 sm:py-8">
                   <div className="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200">
                     <IconContext.Provider value={{ size: "2em" }}>
                       <FaPersonWalking />
                     </IconContext.Provider>
                   </div>
-                  <div className="flex flex-col items-center text-center justify-center">
+                  <div className="flex flex-col items-left text-left justify-left">
                     <h2 className="font-medium title-font mt-4 text-lg">
                       Who are you ...?
                     </h2>
                     <div className="w-12 h-1 bg-indigo-500 rounded mt-2 mb-4"></div>
                   </div>
                 </div>
-                <div className="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
-                  <p className="leading-relaxed text-xg mb-4">
+                <div className="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-right">
+                  <p className="leading-relaxed text-xg m-8">
                     「ぽん」と申します。
                     <br />
                     Sierでバックエンドエンジニアとして働いています。
