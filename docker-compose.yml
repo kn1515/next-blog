@@ -14,7 +14,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./content:/app/content
+      - ./contents:/app/contents
       - ./src:/app/src
       - ./public:/app/public
       - ./eslint.config.js:/app/eslint.config.js
