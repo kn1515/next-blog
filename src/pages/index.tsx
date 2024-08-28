@@ -1,6 +1,6 @@
 import type { InferGetStaticPropsType, NextPage } from "next";
 import Head from "next/head";
-import styles from "@/styles/Home.module.css";
+//import styles from "@/styles/Home.module.css";
 import { getAllPosts } from "@/lib/api";
 import Header from "../components/header";
 import Footer from "../components/footer";
@@ -46,7 +46,7 @@ const Home: NextPage<Props> = ({ allPosts }) => {
                     {allPosts.date}
                   </time>
                   <a
-                    href={allPosts.slug}
+                    href={`/posts/${allPosts.slug}}`}
                     className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
                   >
                     {allPosts.slug}
@@ -54,7 +54,7 @@ const Home: NextPage<Props> = ({ allPosts }) => {
                 </div>
                 <div className="group relative">
                   <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                    <a href={allPosts.title}>
+                    <a href={`/posts/${allPosts.slug}`}>
                       <span className="absolute inset-0" />
                       {allPosts.title}
                     </a>
@@ -66,7 +66,7 @@ const Home: NextPage<Props> = ({ allPosts }) => {
                 <div className="relative mt-8 flex items-center gap-x-4">
                   <div className="text-sm leading-6">
                     <p className="font-semibold text-gray-900">
-                      <a href="#">
+                      <a href={`/posts/${allPosts.slug}`}>
                         <span className="absolute inset-0" />
                         {allPosts.slug}
                       </a>
