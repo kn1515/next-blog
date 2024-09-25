@@ -26,7 +26,7 @@ export default function About() {
               <img
                 src="https://github.com/kn1515.png"
                 alt="GitHub Profile"
-                className="w-2 h-2 rounded-full pr-4 pl-10"
+                className="w-20 h-20 sm:w-16 sm:h-16 md:w-12 md:h-12 lg:w-10 lg:h-10 xl:w-8 xl:h-8 rounded-full pr-4 pl-10"
               />
               <div className="w-full max-w-4xl text-center">
                 <h1 className="text-4xl font-bold mb-4">About</h1>
