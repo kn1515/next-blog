@@ -23,13 +23,13 @@ export default function About() {
               <title>About</title>
             </Head>
             <div className="container mx-auto px-4 py-8 flex items-center justify-center min-h-screen">
+              <img
+                src="https://github.com/kn1515.png"
+                alt="GitHub Profile"
+                className="w-2 h-2 rounded-full pr-4 pl-10"
+              />
               <div className="w-full max-w-4xl text-center">
                 <h1 className="text-4xl font-bold mb-4">About</h1>
-                <div className="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 mx-auto">
-                  <IconContext.Provider value={{ size: "4em" }}>
-                    <FaPersonWalking />
-                  </IconContext.Provider>
-                </div>
                 <p className="text-lg mb-4">
                   ぽんと申します。1996年生まれです。大学では文系でした。
                   <br />
