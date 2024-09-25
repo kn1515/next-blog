@@ -22,7 +22,7 @@ export default function About() {
               <div className="flex flex-col sm:flex-row mt-10">
                 <div className="sm:w-1/3 text-start sm:pr-8 sm:py-8">
                   <div className="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200">
-                    <IconContext.Provider value={{ size: "2em" }}>
+                    <IconContext.Provider value={{ size: "4em" }}>
                       <FaPersonWalking />
                     </IconContext.Provider>
                   </div>
@@ -53,7 +53,7 @@ export default function About() {
               <div className="flex flex-col sm:flex-row mt-10">
                 <div className="sm:w-1/3 text-center sm:pr-8 sm:py-8">
                   <div className="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200">
-                    <IconContext.Provider value={{ size: "2em" }}>
+                    <IconContext.Provider value={{ size: "4em" }}>
                       <FaCube />
                     </IconContext.Provider>
                   </div>
@@ -83,7 +83,7 @@ export default function About() {
               <div className="flex flex-col sm:flex-row mt-10">
                 <div className="sm:w-1/3 text-center sm:pr-8 sm:py-8">
                   <div className="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200">
-                    <IconContext.Provider value={{ size: "2em" }}>
+                    <IconContext.Provider value={{ size: "4em" }}>
                       <FaChartLine />
                     </IconContext.Provider>
                   </div>
