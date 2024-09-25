@@ -31,11 +31,15 @@ export default function About() {
                   </IconContext.Provider>
                 </div>
                 <p className="text-lg mb-4">
-                  ぽんと申します。
+                  ぽんと申します。1996年生まれです。大学では文系でした。
                   <br />
-                  Sierでバックエンドエンジニアとして働いています。
+                  現在は、とあるSIerでバックエンドエンジニアとして働いています。
                   <br />
                   主にPHP/LaravelでのAPI開発を行っています。
+                  <br />
+                  社内システムの運用とかもしております。
+                  <br />
+                  個人としては、SecurityやOS、低レイヤな話題に関心があります。
                 </p>
                 <div className="w-12 h-1 bg-indigo-500 rounded mt-4 mb-8 mx-auto">
                   {" "}

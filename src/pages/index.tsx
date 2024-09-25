@@ -31,7 +31,7 @@ const Home: NextPage<Props> = ({ allPosts }) => {
               ぽんろぐ
             </h2>
             <p className="mt-2 text-lg leading-8 text-gray-600">
-              Learn how to grow your business with our expert advice.
+              IT関連の備忘メモなどを投稿していく予定
             </p>
           </div>
 
