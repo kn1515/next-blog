@@ -1,6 +1,5 @@
 import type { InferGetStaticPropsType, NextPage } from "next";
 import Head from "next/head";
-//import styles from "@/styles/Home.module.css";
 import { getAllPosts } from "@/lib/api";
 import Header from "../components/header";
 import Footer from "../components/footer";
@@ -24,17 +23,24 @@ const Home: NextPage<Props> = ({ allPosts }) => {
         <link rel="icon" href="/favicons/favicon.ico" />
       </Head>
 
-      <div className="bg-white py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl lg:mx-0">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              ぽんろぐ
-            </h2>
-            <p className="mt-2 text-lg leading-8 text-gray-600">
-              IT関連の備忘メモなどを投稿していく予定
-            </p>
-          </div>
+      {/* Hero Section */}
+      <div className="bg-indigo-600 text-white py-24 sm:py-32">
+        <div className="container mx-auto px-6 lg:px-8 text-center">
+          <h1 className="text-5xl font-bold mb-4">ぽんろぐ</h1>
+          <p className="text-lg mb-8">
+            あるエンジニアのIT技術関連に関する備忘録
+          </p>
+          <a
+            href="#posts"
+            className="bg-white text-indigo-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-200"
+          >
+            Blog Posts
+          </a>
+        </div>
+      </div>
 
+      <div className="bg-white py-24 sm:py-32" id="posts">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {allPosts.map((allPosts) => (
               <article
