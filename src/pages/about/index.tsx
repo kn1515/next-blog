@@ -32,7 +32,7 @@ export default function About() {
               </div>
               <div className="w-full md:w-1/2 text-center md:text-left">
                 <h1 className="text-4xl font-bold mb-4">About</h1>
-                <p className="text-lg mb-4">
+                <p className="text-lg mb-4 text-left">
                   ぽんと申します。1996年生まれです。大学では文系でした。
                   <br />
                   現在は、とあるSIerでバックエンドエンジニアとして働いています。
