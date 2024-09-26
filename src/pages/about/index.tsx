@@ -3,7 +3,7 @@ import Container from "../../components/container";
 import Header from "../../components/header";
 import Head from "next/head";
 import { CMS_NAME } from "../../lib/constants";
-import { FaPersonWalking, FaCube, FaChartLine } from "react-icons/fa6";
+import { FaCube } from "react-icons/fa6";
 import { DiCode } from "react-icons/di";
 import { IconContext } from "react-icons";
 
