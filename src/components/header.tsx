@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Icon from "@/public/assets/icon.svg";
+import Icon from "../../public/assets/icon.svg";
 import ChangeThemeButton from "./chante-theme-button";
 import { CMS_NAME } from "../lib/constants";
 
