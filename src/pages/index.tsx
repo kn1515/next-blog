@@ -6,6 +6,16 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import HeroSection from "@/components/hero-section";
 
+type Post = {
+  slug: string;
+  title: string;
+  date: string;
+  content: string;
+  tags: string[];
+  emoji: string;
+  id: string;
+};
+
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 export const getStaticProps = async () => {
@@ -36,6 +46,9 @@ const Home: NextPage<Props> = ({ allPosts }) => {
   // Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+  // Extract unique categories
+  const categories = Array.from(new Set(allPosts.flatMap((post) => post.tags)));
+
   return (
     <>
       <Header />
@@ -49,77 +62,112 @@ const Home: NextPage<Props> = ({ allPosts }) => {
       <HeroSection />
 
       <div className="bg-gray-100 py-24 sm:py-32" id="posts">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-1">
-            {currentPosts.map((post) => (
-              <article
-                key={post.id}
-                className="flex flex-col items-start justify-between p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
-              >
-                <div className="flex items-center gap-x-4 text-xs">
-                  <time dateTime={post.date} className="text-gray-500">
-                    {post.date}
-                  </time>
-                  <a
-                    href={`/posts/${post.slug}`}
-                    className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
-                  >
-                    {post.slug}
-                  </a>
-                </div>
-                <div className="flex items-center gap-x-4 mt-4">
-                  <div className="text-8xl">{post.emoji}</div>
-                  <div className="group relative flex-1">
-                    <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                      <a href={`/posts/${post.slug}`}>
-                        <span className="absolute inset-0" />
-                        {post.title}
-                      </a>
-                    </h3>
-                    <p
-                      className="mt-5 text-sm leading-6 text-gray-600 overflow-hidden text-ellipsis"
-                      style={{
-                        wordWrap: "break-word",
-                        overflowWrap: "break-word",
-                      }}
-                    >
-                      {/*{post.content}*/}
-                    </p>
-                  </div>
-                </div>
-                <div className="relative mt-8 flex items-center gap-x-4">
-                  <div className="text-sm leading-6">
-                    <p className="font-semibold text-gray-900">
-                      <a href={`/posts/${post.slug}`}>
-                        <span className="absolute inset-0" />
-                        {post.slug}
-                      </a>
-                    </p>
-                    <p className="text-gray-600">{post.slug}</p>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-          {/* Pagination */}
-          <div className="flex justify-center mt-8">
-            {Array.from(
-              { length: Math.ceil(allPosts.length / postsPerPage) },
-              (_, i) => (
-                <button
-                  key={`page-${i + 1}`}
-                  type="button"
-                  onClick={() => paginate(i + 1)}
-                  className={`mx-1 px-3 py-1 rounded ${
-                    currentPage === i + 1
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-200 text-gray-700"
-                  }`}
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 flex">
+          <div className="w-3/4">
+            <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-1">
+              {currentPosts.map((post) => (
+                <article
+                  key={post.id}
+                  className="flex flex-col items-start justify-between p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
                 >
-                  {i + 1}
-                </button>
-              )
-            )}
+                  <div className="flex items-center gap-x-4 text-xs">
+                    <time dateTime={post.date} className="text-gray-500">
+                      {post.date}
+                    </time>
+                    <a
+                      href={`/posts/${post.slug}`}
+                      className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
+                    >
+                      {post.slug}
+                    </a>
+                  </div>
+                  <div className="flex items-center gap-x-4 mt-4">
+                    <div className="text-8xl">{post.emoji}</div>
+                    <div className="group relative flex-1">
+                      <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                        <a href={`/posts/${post.slug}`}>
+                          <span className="absolute inset-0" />
+                          {post.title}
+                        </a>
+                      </h3>
+                      <p
+                        className="mt-5 text-sm leading-6 text-gray-600 overflow-hidden text-ellipsis"
+                        style={{
+                          wordWrap: "break-word",
+                          overflowWrap: "break-word",
+                        }}
+                      >
+                        {/*{post.content}*/}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="relative mt-8 flex items-center gap-x-4">
+                    <div className="text-sm leading-6">
+                      <p className="font-semibold text-gray-900">
+                        <a href={`/posts/${post.slug}`}>
+                          <span className="absolute inset-0" />
+                          {post.slug}
+                        </a>
+                      </p>
+                      <p className="text-gray-600">{post.slug}</p>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+            {/* Pagination */}
+            <div className="flex justify-center mt-8">
+              {Array.from(
+                { length: Math.ceil(allPosts.length / postsPerPage) },
+                (_, i) => (
+                  <button
+                    key={`page-${i + 1}`}
+                    type="button"
+                    onClick={() => paginate(i + 1)}
+                    className={`mx-1 px-3 py-1 rounded ${
+                      currentPage === i + 1
+                        ? "bg-blue-500 text-white"
+                        : "bg-gray-200 text-gray-700"
+                    }`}
+                  >
+                    {i + 1}
+                  </button>
+                )
+              )}
+            </div>
+          </div>
+          {/* Sidebar */}
+          <div className="w-1/4 pl-8">
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h2 className="text-lg font-semibold mb-4">カテゴリ</h2>
+              <ul>
+                {categories.map((category) => (
+                  <li key={category} className="mb-2">
+                    <a
+                      href={`#${category}`}
+                      className="text-blue-500 hover:underline"
+                    >
+                      {category}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md mt-8">
+              <h2 className="text-lg font-semibold mb-4">最新記事</h2>
+              <ul>
+                {allPosts.map((post) => (
+                  <li key={post.id} className="mb-2">
+                    <a
+                      href={`/posts/${post.slug}`}
+                      className="text-blue-500 hover:underline"
+                    >
+                      {post.date} - {post.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
