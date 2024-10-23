@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { InferGetStaticPropsType, NextPage } from "next";
 import Head from "next/head";
 import { getAllPosts } from "@/lib/api";
@@ -9,12 +10,32 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 export const getStaticProps = async () => {
   const allPosts = getAllPosts(["slug", "title", "date", "content", "tags"]);
+  const emojis = ["📷", "🎉", "🚀", "🌟", "🔥", "💡", "📚", "✈️", "🎨", "🎵"];
+
+  // Add a random emoji and unique ID to each post
+  const postsWithEmojis = allPosts.map((post, index) => ({
+    ...post,
+    emoji: emojis[Math.floor(Math.random() * emojis.length)],
+    id: `${post.slug}-${index}`,
+  }));
+
   return {
-    props: { allPosts },
+    props: { allPosts: postsWithEmojis },
   };
 };
 
 const Home: NextPage<Props> = ({ allPosts }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 10;
+
+  // Calculate the current posts to display
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = allPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Change page
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
   return (
     <>
       <Header />
@@ -27,49 +48,78 @@ const Home: NextPage<Props> = ({ allPosts }) => {
       {/* Hero Section */}
       <HeroSection />
 
-      <div className="bg-white py-24 sm:py-32" id="posts">
+      <div className="bg-gray-100 py-24 sm:py-32" id="posts">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-            {allPosts.map((allPosts) => (
+          <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-1">
+            {currentPosts.map((post) => (
               <article
-                key={allPosts.title}
-                className="flex max-w-xl flex-col items-start justify-between"
+                key={post.id}
+                className="flex flex-col items-start justify-between p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
               >
                 <div className="flex items-center gap-x-4 text-xs">
-                  <time dateTime={allPosts.date} className="text-gray-500">
-                    {allPosts.date}
+                  <time dateTime={post.date} className="text-gray-500">
+                    {post.date}
                   </time>
                   <a
-                    href={`/posts/${allPosts.slug}}`}
+                    href={`/posts/${post.slug}`}
                     className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
                   >
-                    {allPosts.slug}
+                    {post.slug}
                   </a>
                 </div>
-                <div className="group relative">
-                  <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                    <a href={`/posts/${allPosts.slug}`}>
-                      <span className="absolute inset-0" />
-                      {allPosts.title}
-                    </a>
-                  </h3>
-                  <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
-                    {allPosts.content}
-                  </p>
+                <div className="flex items-center gap-x-4 mt-4">
+                  <div className="text-8xl">{post.emoji}</div>
+                  <div className="group relative flex-1">
+                    <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                      <a href={`/posts/${post.slug}`}>
+                        <span className="absolute inset-0" />
+                        {post.title}
+                      </a>
+                    </h3>
+                    <p
+                      className="mt-5 text-sm leading-6 text-gray-600 overflow-hidden text-ellipsis"
+                      style={{
+                        wordWrap: "break-word",
+                        overflowWrap: "break-word",
+                      }}
+                    >
+                      {/*{post.content}*/}
+                    </p>
+                  </div>
                 </div>
                 <div className="relative mt-8 flex items-center gap-x-4">
                   <div className="text-sm leading-6">
                     <p className="font-semibold text-gray-900">
-                      <a href={`/posts/${allPosts.slug}`}>
+                      <a href={`/posts/${post.slug}`}>
                         <span className="absolute inset-0" />
-                        {allPosts.slug}
+                        {post.slug}
                       </a>
                     </p>
-                    <p className="text-gray-600">allPosts.slug</p>
+                    <p className="text-gray-600">{post.slug}</p>
                   </div>
                 </div>
               </article>
             ))}
+          </div>
+          {/* Pagination */}
+          <div className="flex justify-center mt-8">
+            {Array.from(
+              { length: Math.ceil(allPosts.length / postsPerPage) },
+              (_, i) => (
+                <button
+                  key={`page-${i + 1}`}
+                  type="button"
+                  onClick={() => paginate(i + 1)}
+                  className={`mx-1 px-3 py-1 rounded ${
+                    currentPage === i + 1
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-200 text-gray-700"
+                  }`}
+                >
+                  {i + 1}
+                </button>
+              )
+            )}
           </div>
         </div>
       </div>
