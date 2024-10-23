@@ -49,7 +49,7 @@ const Home: NextPage<Props> = ({ allPosts }) => {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   // Extract unique categories
-  const categories = Array.from(new Set(allPosts.flatMap((post) => post.tags)));
+  // const categories = Array.from(new Set(allPosts.flatMap((post) => post.tags)));
 
   return (
     <>
@@ -124,7 +124,7 @@ const Home: NextPage<Props> = ({ allPosts }) => {
               paginate={paginate}
             />
           </div>
-          <Sidebar categories={categories} allPosts={allPosts} />
+          {/*<Sidebar categories={categories} allPosts={allPosts} />*/}
         </div>
       </div>
 
