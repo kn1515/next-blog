@@ -5,6 +5,8 @@ import { getAllPosts } from "@/lib/api";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import HeroSection from "@/components/hero-section";
+import Sidebar from "@/components/sidebar";
+import Pagination from "@/components/pagination";
 
 type Post = {
   slug: string;
@@ -115,60 +117,14 @@ const Home: NextPage<Props> = ({ allPosts }) => {
                 </article>
               ))}
             </div>
-            {/* Pagination */}
-            <div className="flex justify-center mt-8">
-              {Array.from(
-                { length: Math.ceil(allPosts.length / postsPerPage) },
-                (_, i) => (
-                  <button
-                    key={`page-${i + 1}`}
-                    type="button"
-                    onClick={() => paginate(i + 1)}
-                    className={`mx-1 px-3 py-1 rounded ${
-                      currentPage === i + 1
-                        ? "bg-blue-500 text-white"
-                        : "bg-gray-200 text-gray-700"
-                    }`}
-                  >
-                    {i + 1}
-                  </button>
-                )
-              )}
-            </div>
+            <Pagination
+              totalPosts={allPosts.length}
+              postsPerPage={postsPerPage}
+              currentPage={currentPage}
+              paginate={paginate}
+            />
           </div>
-          {/* Sidebar */}
-          <div className="w-1/4 pl-8">
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h2 className="text-lg font-semibold mb-4">カテゴリ</h2>
-              <ul>
-                {categories.map((category) => (
-                  <li key={category} className="mb-2">
-                    <a
-                      href={`#${category}`}
-                      className="text-blue-500 hover:underline"
-                    >
-                      {category}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md mt-8">
-              <h2 className="text-lg font-semibold mb-4">最新記事</h2>
-              <ul>
-                {allPosts.map((post) => (
-                  <li key={post.id} className="mb-2">
-                    <a
-                      href={`/posts/${post.slug}`}
-                      className="text-blue-500 hover:underline"
-                    >
-                      {post.date} - {post.title}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          <Sidebar categories={categories} allPosts={allPosts} />
         </div>
       </div>
 
