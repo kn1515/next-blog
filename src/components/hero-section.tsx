@@ -1,6 +1,6 @@
 const HeroSection = () => {
   return (
-    <div className="bg-indigo-600 text-white py-24 sm:py-32">
+    <div className="bg-indigo-600 text-white py-8 sm:py-18">
       <div className="container mx-auto px-6 lg:px-8 text-center">
         <img
           src="https://github.com/kn1515.png"
