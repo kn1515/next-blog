@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import matter from "gray-matter";
 
 type Post = {
@@ -7,6 +7,7 @@ type Post = {
   content: string;
   title: string;
   date: string;
+  tags: string[];
 };
 
 const postsDirectory = path.join(process.cwd(), "contents");
@@ -34,9 +35,10 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
     content: "",
     title: "",
     date: "",
+    tags: [],
   };
 
-  fields.forEach((field) => {
+  for (const field of fields) {
     if (field === "slug") {
       items[field] = slug;
     }
@@ -46,7 +48,7 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
     if (field === "title" || field === "date") {
       items[field] = data[field];
     }
-  });
+  }
   return items;
 }
 
