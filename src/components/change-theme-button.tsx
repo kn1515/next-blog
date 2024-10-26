@@ -1,4 +1,4 @@
-import React, { useState, useEffect, VFC } from "react";
+import React, { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { SunLight, HalfMoon } from "iconoir-react";
 
