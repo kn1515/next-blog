@@ -4,6 +4,17 @@ import Icon from "../../public/assets/icon.svg";
 import ChangeThemeButton from "./change-theme-button";
 import { CMS_NAME } from "../lib/constants";
 
+type Post = {
+  id: string;
+  slug: string;
+  date: string;
+  title: string;
+};
+
+type HeaderProps = {
+  allPosts: Post[];
+};
+
 const Header = () => {
   return (
     <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-left justify-between">
