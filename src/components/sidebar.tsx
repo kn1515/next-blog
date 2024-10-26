@@ -1,5 +1,3 @@
-// components/Sidebar.tsx
-
 type SidebarProps = {
   categories: string[];
   allPosts: {
@@ -12,7 +10,7 @@ type SidebarProps = {
 
 const Sidebar: React.FC<SidebarProps> = ({ categories, allPosts }) => {
   return (
-    <div className="w-1/4 pl-8">
+    <div className="hidden md:block w-1/4 pl-8">
       <div className="bg-white p-6 rounded-lg shadow-md">
         <h2 className="text-lg font-semibold mb-4">カテゴリ</h2>
         <ul>
