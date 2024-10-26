@@ -15,7 +15,7 @@ type HeaderProps = {
   allPosts: Post[];
 };
 
-const Header = () => {
+const Header: React.FC<HeaderProps> = () => {
   return (
     <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-left justify-between">
       <div className="flex items-center">
