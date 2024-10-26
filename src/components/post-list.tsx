@@ -16,7 +16,7 @@ type PostListProps = {
   totalPosts: number;
   postsPerPage: number;
   currentPage: number;
-  paginate: (pageNumber: number) => void;
+  loadMore: () => void;
 };
 
 const PostList: React.FC<PostListProps> = ({
@@ -24,7 +24,7 @@ const PostList: React.FC<PostListProps> = ({
   totalPosts,
   postsPerPage,
   currentPage,
-  paginate,
+  loadMore,
 }) => {
   return (
     <>
@@ -37,7 +37,7 @@ const PostList: React.FC<PostListProps> = ({
         totalPosts={totalPosts}
         postsPerPage={postsPerPage}
         currentPage={currentPage}
-        paginate={paginate}
+        loadMore={loadMore}
       />
     </>
   );

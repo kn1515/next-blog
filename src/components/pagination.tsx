@@ -1,39 +1,29 @@
-// components/Pagination.tsx
-
 type PaginationProps = {
   totalPosts: number;
   postsPerPage: number;
   currentPage: number;
-  paginate: (pageNumber: number) => void;
+  loadMore: () => void;
 };
 
 const Pagination: React.FC<PaginationProps> = ({
   totalPosts,
   postsPerPage,
   currentPage,
-  paginate,
+  loadMore,
 }) => {
-  const pageNumbers = Array.from(
-    { length: Math.ceil(totalPosts / postsPerPage) },
-    (_, i) => i + 1
-  );
+  const totalPages = Math.ceil(totalPosts / postsPerPage);
 
   return (
     <div className="flex justify-center mt-8">
-      {pageNumbers.map((number) => (
+      {currentPage < totalPages && (
         <button
-          key={number}
           type="button"
-          onClick={() => paginate(number)}
-          className={`mx-1 px-3 py-1 rounded ${
-            currentPage === number
-              ? "bg-blue-500 text-white"
-              : "bg-gray-200 text-gray-700"
-          }`}
+          onClick={loadMore}
+          className="mx-1 px-3 py-1 rounded bg-blue-500 text-white"
         >
-          {number}
+          Load More
         </button>
-      ))}
+      )}
     </div>
   );
 };

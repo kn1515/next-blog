@@ -42,11 +42,11 @@ const Home: NextPage<Props> = ({ allPosts }) => {
 
   // Calculate the current posts to display
   const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const indexOfFirstPost = 0; // Always start from the first post
   const currentPosts = allPosts.slice(indexOfFirstPost, indexOfLastPost);
 
-  // Change page
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  // Load more posts
+  const loadMore = () => setCurrentPage((prevPage) => prevPage + 1);
 
   // Extract unique categories
   const categories = Array.from(new Set(allPosts.flatMap((post) => post.tags)));
@@ -71,7 +71,7 @@ const Home: NextPage<Props> = ({ allPosts }) => {
               totalPosts={allPosts.length}
               postsPerPage={postsPerPage}
               currentPage={currentPage}
-              paginate={paginate}
+              loadMore={loadMore}
             />
           </div>
           <Sidebar categories={categories} allPosts={allPosts} />
