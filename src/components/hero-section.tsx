@@ -9,12 +9,6 @@ const HeroSection = () => {
         />
         <h1 className="text-5xl font-bold mb-4">ぽんろぐ備忘録</h1>
         <p className="text-lg mb-8">あるエンジニアのIT技術関連に関する備忘録</p>
-        <a
-          href="#posts"
-          className="bg-white text-indigo-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-200"
-        >
-          Blog Posts
-        </a>
       </div>
     </div>
   );
