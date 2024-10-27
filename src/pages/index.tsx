@@ -55,8 +55,8 @@ const Home: NextPage<Props> = ({ allPosts }) => {
       <HeroSection />
 
       <div className="bg-gray-100 py-24 sm:py-32" id="posts">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 flex">
-          <div className="w-3/4">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 sm:px-2 flex">
+          <div className="w-5/6">
             <PostList
               posts={currentPosts}
               totalPosts={allPosts.length}
